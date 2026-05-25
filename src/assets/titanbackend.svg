@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+    <linearGradient id="accent2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" rx="56" fill="url(#bg2)" />
+  <rect x="100" y="130" width="1000" height="620" rx="48" fill="#ffffff" opacity="0.95" />
+  <rect x="160" y="210" width="880" height="140" rx="36" fill="url(#accent2)" />
+  <rect x="160" y="390" width="900" height="88" rx="28" fill="#f8fafc" />
+  <rect x="160" y="520" width="480" height="92" rx="28" fill="#e2e8f0" />
+  <rect x="680" y="520" width="340" height="92" rx="28" fill="#cbd5e1" />
+  <rect x="160" y="650" width="560" height="86" rx="28" fill="#f1f5f9" />
+  <path d="M860 250h120v120h-120z" fill="#fff" stroke="#94a3b8" stroke-width="4" opacity="0.95" />
+  <path d="M890 280h60v60h-60z" fill="#334155" opacity="0.14" />
+  <path d="M880 310h40v20h-40z" fill="#475569" opacity="0.4" />
+  <circle cx="300" cy="340" r="72" fill="#64748b" opacity="0.16" />
+  <circle cx="320" cy="380" r="38" fill="#475569" opacity="0.28" />
+  <path d="M240 550h160v20h-160z" fill="#94a3b8" opacity="0.5" />
+  <path d="M240 590h120v20h-120z" fill="#94a3b8" opacity="0.5" />
+  <path d="M240 630h80v20h-80z" fill="#94a3b8" opacity="0.5" />
+  <text x="600" y="215" text-anchor="middle" font-family="Inter, sans-serif" font-size="76" fill="#1e293b" font-weight="700">Titan Backend</text>
+  <text x="600" y="295" text-anchor="middle" font-family="Inter, sans-serif" font-size="34" fill="#475569">Construction platform APIs</text>
+</svg>

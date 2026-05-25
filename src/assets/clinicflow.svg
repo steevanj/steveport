@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dbeafe" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" rx="56" fill="url(#bg)" />
+  <rect x="120" y="140" width="960" height="620" rx="44" fill="#ffffff" opacity="0.92" />
+  <rect x="180" y="200" width="840" height="120" rx="28" fill="url(#accent)" />
+  <rect x="180" y="360" width="540" height="80" rx="24" fill="#f8fafc" />
+  <rect x="180" y="470" width="760" height="140" rx="24" fill="#f1f5f9" />
+  <rect x="180" y="640" width="260" height="90" rx="20" fill="#e2e8f0" />
+  <rect x="500" y="640" width="260" height="90" rx="20" fill="#cbd5e1" />
+  <rect x="820" y="640" width="120" height="90" rx="20" fill="#e2e8f0" />
+  <circle cx="280" cy="520" r="28" fill="#475569" opacity="0.7" />
+  <circle cx="340" cy="560" r="18" fill="#64748b" opacity="0.8" />
+  <path d="M260 380h160v22H260z" fill="#94a3b8" opacity="0.5" />
+  <path d="M260 430h120v22H260z" fill="#94a3b8" opacity="0.5" />
+  <path d="M260 480h180v22H260z" fill="#94a3b8" opacity="0.5" />
+  <path d="M260 530h90v22H260z" fill="#94a3b8" opacity="0.5" />
+  <circle cx="860" cy="310" r="80" fill="#475569" opacity="0.12" />
+  <circle cx="880" cy="340" r="44" fill="#64748b" opacity="0.18" />
+  <rect x="760" y="260" width="240" height="120" rx="24" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" />
+  <text x="600" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="80" fill="#334155" font-weight="700">ClinicFlow</text>
+  <text x="600" y="285" text-anchor="middle" font-family="Inter, sans-serif" font-size="36" fill="#475569">Backend Operations Suite</text>
+</svg>
