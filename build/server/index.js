@@ -1,5 +1,7 @@
-import { w } from "./assets/worker-entry-YDwaeoxi.js";
-import "node:events";
-export {
-  w as default
-};
+import { createStartHandler } from '@tanstack/start/server'
+import manifest from './.vite/manifest.json'
+
+// Cloudflare Worker entry point
+export default {
+  fetch: createStartHandler({ manifest })
+}
