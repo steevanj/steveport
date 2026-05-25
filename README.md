@@ -11,14 +11,14 @@ npm run dev
 
 ## Build output
 
-Running `npm run build` generates:
+Running `npm run cf:build` generates:
 
-- `dist/client` for static assets
-- `dist/server` for the Cloudflare Worker bundle
+- `build/client` for static assets
+- `build/server` for the Cloudflare Worker bundle
 
 ## Cloudflare deployment
 
-This repo is meant to deploy with Wrangler using the generated Worker config in `dist/server/wrangler.json`.
+This repo is meant to deploy with Wrangler using the generated Worker config in `build/server/wrangler.json`.
 
 ```bash
 npm run cf:deploy
@@ -27,10 +27,22 @@ npm run cf:deploy
 That command will:
 
 1. Build the app with `vite build`
-2. Deploy the generated Worker from `dist/server`
-3. Serve static assets from `dist/client`
+2. Deploy the generated Worker from `build/server`
+3. Serve static assets from `build/client`
+
+Set a Cloudflare API token before deploying in non-interactive environments:
+
+```bash
+CLOUDFLARE_API_TOKEN=your-token-here
+```
 
 ## Local Cloudflare preview
+
+To build only:
+
+```bash
+npm run cf:build
+```
 
 To preview the built Worker locally:
 
@@ -42,4 +54,5 @@ npm run cf:preview
 
 - This project is not set up as a Vercel app.
 - `wrangler.jsonc` in the repo root is the source config used during build.
-- The deployable config is generated at `dist/server/wrangler.json` after each build.
+- The deployable config is generated at `build/server/wrangler.json` after each build.
+- Wrangler logs are written to `build/wrangler.log` by the helper script.

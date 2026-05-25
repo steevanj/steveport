@@ -5,6 +5,23 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
 // @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
 export default defineConfig({
+  vite: {
+    build: {
+      outDir: "build",
+    },
+    environments: {
+      client: {
+        build: {
+          outDir: "build/client",
+        },
+      },
+      server: {
+        build: {
+          outDir: "build/server",
+        },
+      },
+    },
+  },
   tanstackStart: {
     server: { entry: "server" },
   },
