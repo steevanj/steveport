@@ -1,4 +1,4 @@
-import { mkdirSync } from "node:fs";
+import { mkdirSync, rmSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join, resolve } from "node:path";
 
@@ -8,6 +8,8 @@ const root = process.cwd();
 const buildDir = resolve(root, "build");
 const xdgDir = join(buildDir, "xdg");
 const wranglerLogPath = join(buildDir, "wrangler.log");
+const wranglerStateDir = join(buildDir, "wrangler-state");
+const generatedWranglerStateDir = join(buildDir, "server", ".wrangler");
 const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
 const wranglerCmd = resolve(
   root,
@@ -18,6 +20,7 @@ const wranglerCmd = resolve(
 
 mkdirSync(buildDir, { recursive: true });
 mkdirSync(xdgDir, { recursive: true });
+mkdirSync(wranglerStateDir, { recursive: true });
 
 const env = {
   ...process.env,
@@ -26,11 +29,12 @@ const env = {
 };
 
 function run(command, args) {
+  const isWindowsCmd = process.platform === "win32" && command.toLowerCase().endsWith(".cmd");
   const result = spawnSync(command, args, {
     cwd: root,
     env,
     stdio: "inherit",
-    shell: true,
+    shell: isWindowsCmd,
   });
 
   if (result.status !== 0) {
@@ -38,15 +42,29 @@ function run(command, args) {
   }
 }
 
+function cleanupGeneratedWranglerState() {
+  rmSync(generatedWranglerStateDir, { recursive: true, force: true });
+}
+
 switch (mode) {
   case "build":
+    cleanupGeneratedWranglerState();
     run(npmCmd, ["run", "build"]);
     break;
   case "preview":
+    cleanupGeneratedWranglerState();
     run(npmCmd, ["run", "build"]);
-    run(wranglerCmd, ["dev", "--config", "build/server/wrangler.json", ...extraArgs]);
+    run(wranglerCmd, [
+      "dev",
+      "--config",
+      "build/server/wrangler.json",
+      "--persist-to",
+      wranglerStateDir,
+      ...extraArgs,
+    ]);
     break;
   case "deploy":
+    cleanupGeneratedWranglerState();
     run(npmCmd, ["run", "build"]);
     run(wranglerCmd, ["deploy", "--config", "build/server/wrangler.json", ...extraArgs]);
     break;

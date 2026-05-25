@@ -9,8 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-
-const profileImage = new URL("../assets/title.png", import.meta.url).href;
+import profileImage from "../assets/title.png";
 
 function NotFoundComponent() {
   return (
