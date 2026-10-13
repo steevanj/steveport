@@ -1,0 +1,20 @@
+'Log files:
+C:\Users\steec\OneDrive\Pictures\steve\Site\steveport\.npm-cache\_logs\2026-10-13T21_49_59_371Z-debug-0.log
+
+# npm resolution error report
+
+While resolving: tanstack_start_ts@undefined
+Found: @tanstack/react-router@1.170.8
+node_modules/@tanstack/react-router
+  @tanstack/react-router@"^1.168.25" from the root project
+
+Could not resolve dependency:
+@tanstack/router-plugin@"1.168.45" from the root project
+
+Conflicting peer dependency: @tanstack/react-router@1.170.44
+node_modules/@tanstack/react-router
+  peerOptional @tanstack/react-router@"^1.170.44" from @tanstack/router-plugin@1.168.45
+  node_modules/@tanstack/router-plugin
+    @tanstack/router-plugin@"1.168.45" from the root project
+
+Fix the upstream dependency conflict, or retry this command with --force or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
