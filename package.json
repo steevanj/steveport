@@ -10,6 +10,7 @@
     "cf:build": "node scripts/cloudflare-runner.mjs build",
     "cf:preview": "node scripts/cloudflare-runner.mjs preview",
     "cf:deploy": "node scripts/cloudflare-runner.mjs deploy",
+    "deploy": "node scripts/cloudflare-runner.mjs deploy",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
