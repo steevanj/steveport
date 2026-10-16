@@ -11,8 +11,8 @@
   }
 
   body {
-    background-color: #000000;
-    color: #e5e5e5;
+    background-color: #f8fafc;
+    color: #1e293b;
     font-family: 'Quantico', sans-serif;
     overflow-x: hidden;
   }
@@ -21,14 +21,14 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #e2e8f0;
   }
   ::-webkit-scrollbar-thumb {
-    background: #00ff41;
+    background: #2563eb;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #ff2222;
+    background: #7c3aed;
   }
 }
 
@@ -38,39 +38,39 @@
   }
 
   .text-glow-green {
-    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 40px #00ff4180;
+    text-shadow: 0 0 10px #2563eb, 0 0 20px #2563eb, 0 0 40px #2563eb80;
   }
 
   .text-glow-red {
-    text-shadow: 0 0 10px #ff2222, 0 0 20px #ff2222, 0 0 40px #ff222280;
+    text-shadow: 0 0 10px #7c3aed, 0 0 20px #7c3aed, 0 0 40px #7c3aed80;
   }
 
   .text-glow-white {
-    text-shadow: 0 0 8px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.3);
+    text-shadow: 0 0 8px rgba(15,23,42,0.15), 0 0 20px rgba(37,99,235,0.1);
   }
 
   .glow-border-green {
-    box-shadow: 0 0 8px #00ff4160, 0 0 20px #00ff4130, inset 0 0 8px #00ff4110;
-    border-color: #00ff41;
+    box-shadow: 0 0 8px #2563eb40, 0 0 20px #2563eb20, inset 0 0 8px #2563eb08;
+    border-color: #2563eb;
   }
 
   .glow-border-red {
-    box-shadow: 0 0 8px #ff222260, 0 0 20px #ff222230, inset 0 0 8px #ff222210;
-    border-color: #ff2222;
+    box-shadow: 0 0 8px #7c3aed40, 0 0 20px #7c3aed20, inset 0 0 8px #7c3aed08;
+    border-color: #7c3aed;
   }
 
   .glow-box-green {
-    box-shadow: 0 0 15px #00ff4140, 0 0 40px #00ff4120;
+    box-shadow: 0 0 15px #2563eb25, 0 0 40px #2563eb12;
   }
 
   .glow-box-red {
-    box-shadow: 0 0 15px #ff222240, 0 0 40px #ff222220;
+    box-shadow: 0 0 15px #7c3aed25, 0 0 40px #7c3aed12;
   }
 
   .bg-grid {
     background-image:
-      linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+      linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
@@ -86,7 +86,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #00ff41, transparent);
+    background: linear-gradient(90deg, transparent, #2563eb, transparent);
     animation: scan 4s linear infinite;
   }
 
@@ -104,7 +104,7 @@
     pointer-events: none;
     z-index: 1;
     opacity: 0.75;
-    background: radial-gradient(420px circle at var(--pointer-x, 50%) var(--pointer-y, 25%), rgba(0, 255, 65, 0.08), transparent 68%);
+    background: radial-gradient(420px circle at var(--pointer-x, 50%) var(--pointer-y, 25%), rgba(37, 99, 235, 0.06), transparent 68%);
     transition: background 180ms ease-out;
   }
 
@@ -136,13 +136,13 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px #00ff4160, 0 0 20px #00ff4130; }
-  50% { box-shadow: 0 0 15px #00ff4190, 0 0 40px #00ff4150, 0 0 60px #00ff4120; }
+  0%, 100% { box-shadow: 0 0 8px #2563eb50, 0 0 20px #2563eb28; }
+  50% { box-shadow: 0 0 15px #2563eb70, 0 0 40px #2563eb40, 0 0 60px #2563eb18; }
 }
 
 @keyframes pulse-glow-red {
-  0%, 100% { box-shadow: 0 0 8px #ff222260, 0 0 20px #ff222230; }
-  50% { box-shadow: 0 0 15px #ff222290, 0 0 40px #ff222250, 0 0 60px #ff222220; }
+  0%, 100% { box-shadow: 0 0 8px #7c3aed50, 0 0 20px #7c3aed28; }
+  50% { box-shadow: 0 0 15px #7c3aed70, 0 0 40px #7c3aed40, 0 0 60px #7c3aed18; }
 }
 
 @keyframes matrix-rain {
@@ -205,7 +205,7 @@
 .animate-blink-cursor::after {
   content: '|';
   animation: blink-cursor 1s step-end infinite;
-  color: #00ff41;
+  color: #2563eb;
   margin-left: 2px;
 }
 
@@ -262,11 +262,11 @@
 /* Progress bar */
 .progress-bar {
   height: 3px;
-  background: linear-gradient(90deg, #00ff41, #00cc33);
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
   border-radius: 2px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 8px #00ff4180;
+  box-shadow: 0 0 8px #2563eb50;
   transition: width 1.2s ease;
   width: 0%;
 }
@@ -304,8 +304,8 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: #00ff41;
-  box-shadow: 0 0 6px #00ff41;
+  background: #2563eb;
+  box-shadow: 0 0 6px #2563eb80;
   transition: width 0.3s;
 }
 
@@ -334,7 +334,7 @@
 
 .project-card:hover {
   transform: translateY(-8px) rotateX(1deg) rotateY(-1deg);
-  box-shadow: 0 18px 45px rgba(0, 255, 65, 0.08);
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.12);
 }
 
 .project-card:hover::before,
@@ -351,8 +351,8 @@
 
 .stat-card:hover {
   transform: translateY(-5px) scale(1.03);
-  border-color: #00ff4160;
-  background-color: #00ff4110;
+  border-color: #2563eb40;
+  background-color: #2563eb08;
 }
 
 .hero-orb {
@@ -376,7 +376,7 @@
 /* Terminal typing effect */
 .terminal-text {
   font-family: 'Share Tech Mono', monospace;
-  color: #00ff41;
+  color: #2563eb;
 }
 
 @media (prefers-reduced-motion: reduce) {

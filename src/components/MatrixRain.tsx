@@ -16,25 +16,25 @@ export default function MatrixRain() {
     resize();
     window.addEventListener('resize', resize);
 
-    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン{}[]<>/\\|=+-*&^%$#@!~';
-    const columns = Math.floor(canvas.width / 18);
+    const chars = '01{}[]<>/\\|=+-*&^%$#@!~ABCDEFabcdef0123456789';
+    const columns = Math.floor(canvas.width / 20);
     const drops: number[] = Array(columns).fill(1);
-    const colors = ['#00ff41', '#00cc33', '#ff2222', '#cc1111'];
+    const colors = ['#2563eb', '#1d4ed8', '#7c3aed', '#6d28d9'];
 
     const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = 'rgba(248, 250, 252, 0.08)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.font = '14px "Share Tech Mono", monospace';
+      ctx.font = '13px "Share Tech Mono", monospace';
 
       for (let i = 0; i < drops.length; i++) {
         const char = chars[Math.floor(Math.random() * chars.length)];
         const colorIdx = Math.random() > 0.95 ? 3 : Math.random() > 0.85 ? 2 : 1;
-        ctx.fillStyle = colorIdx >= 2 ? colors[colorIdx] + '66' : colors[colorIdx] + '99';
+        ctx.fillStyle = colorIdx >= 2 ? colors[colorIdx] + '44' : colors[colorIdx] + '66';
 
-        ctx.fillText(char, i * 18, drops[i] * 18);
+        ctx.fillText(char, i * 20, drops[i] * 20);
 
-        if (drops[i] * 18 > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
         drops[i]++;
@@ -52,7 +52,7 @@ export default function MatrixRain() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none"
-      style={{ opacity: 0.18, zIndex: 0 }}
+      style={{ opacity: 0.12, zIndex: 0 }}
     />
   );
 }

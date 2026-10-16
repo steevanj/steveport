@@ -21,8 +21,8 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white relative motion-root">
-      {/* Animated matrix rain background */}
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 relative motion-root">
+      {/* Animated background */}
       <MatrixRain />
 
       {/* Pointer-reactive art direction layer */}
@@ -32,7 +32,7 @@ export default function App() {
       <div
         className="fixed inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 0%, #00ff4108 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.05) 0%, transparent 60%)',
           zIndex: 1,
         }}
       />

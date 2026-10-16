@@ -57,21 +57,21 @@ export default function Projects() {
       <div className="max-w-5xl mx-auto px-6">
         {/* Section header */}
         <div className="reveal mb-16 text-center">
-          <p className="font-mono-code text-xs text-[#ff2222] tracking-widest mb-3">// PORTFOLIO</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Featured <span className="text-[#ff2222] text-glow-red">Projects</span>
+          <p className="font-mono-code text-xs text-[#7c3aed] tracking-widest mb-3">// PORTFOLIO</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+            Featured <span className="text-[#7c3aed]">Projects</span>
           </h2>
-          <div className="mt-4 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-[#ff2222] to-transparent" />
+          <div className="mt-4 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, i) => (
             <div
               key={project.name}
-              className={`reveal project-card relative clip-corner border p-8 overflow-hidden scan-line ${
+              className={`reveal project-card relative clip-corner border p-8 overflow-hidden scan-line bg-white shadow-sm ${
                 project.color === 'green'
-                  ? 'border-[#00ff4130] bg-[#00ff4105] hover:border-[#00ff4180]'
-                  : 'border-[#ff222230] bg-[#ff22220a] hover:border-[#ff222280]'
+                  ? 'border-[#2563eb20] hover:border-[#2563eb60]'
+                  : 'border-[#7c3aed20] hover:border-[#7c3aed60]'
               }`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
@@ -80,8 +80,8 @@ export default function Projects() {
                 className="absolute -top-8 -right-8 w-32 h-32 rounded-full pointer-events-none"
                 style={{
                   background: project.color === 'green'
-                    ? 'radial-gradient(circle, #00ff4115 0%, transparent 70%)'
-                    : 'radial-gradient(circle, #ff222215 0%, transparent 70%)',
+                    ? 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)'
+                    : 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)',
                 }}
               />
 
@@ -90,21 +90,21 @@ export default function Projects() {
                 <div>
                   <div className="flex items-center gap-3 mb-1">
                     <h3 className={`font-bold text-2xl ${
-                      project.color === 'green' ? 'text-[#00ff41]' : 'text-[#ff2222]'
+                      project.color === 'green' ? 'text-[#2563eb]' : 'text-[#7c3aed]'
                     }`}>
                       {project.name}
                     </h3>
                     <span
                       className={`px-2 py-0.5 text-xs font-mono-code font-bold border ${
                         project.color === 'green'
-                          ? 'border-[#00ff41] text-[#00ff41]'
-                          : 'border-[#ff2222] text-[#ff2222]'
+                          ? 'border-[#2563eb] text-[#2563eb]'
+                          : 'border-[#7c3aed] text-[#7c3aed]'
                       }`}
                     >
                       {project.badge}
                     </span>
                   </div>
-                  <p className="text-gray-500 text-sm font-mono-code">{project.subtitle}</p>
+                  <p className="text-slate-400 text-sm font-mono-code">{project.subtitle}</p>
                 </div>
                 <a
                   href={project.url}
@@ -112,8 +112,8 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className={`p-2 border transition-all duration-300 ${
                     project.color === 'green'
-                      ? 'border-[#00ff4130] text-[#00ff41] hover:bg-[#00ff4120] hover:border-[#00ff41]'
-                      : 'border-[#ff222230] text-[#ff2222] hover:bg-[#ff222220] hover:border-[#ff2222]'
+                      ? 'border-[#2563eb20] text-[#2563eb] hover:bg-[#2563eb10] hover:border-[#2563eb]'
+                      : 'border-[#7c3aed20] text-[#7c3aed] hover:bg-[#7c3aed10] hover:border-[#7c3aed]'
                   }`}
                 >
                   <ExternalLink size={16} />
@@ -121,7 +121,7 @@ export default function Projects() {
               </div>
 
               {/* Period */}
-              <div className="flex items-center gap-2 text-gray-500 text-xs font-mono-code mb-5">
+              <div className="flex items-center gap-2 text-slate-400 text-xs font-mono-code mb-5">
                 <Calendar size={12} />
                 {project.period}
               </div>
@@ -129,11 +129,11 @@ export default function Projects() {
               {/* Points */}
               <ul className="space-y-2 mb-6">
                 {project.points.map((pt) => (
-                  <li key={pt} className="flex items-start gap-2 text-gray-400 text-sm leading-relaxed">
+                  <li key={pt} className="flex items-start gap-2 text-slate-600 text-sm leading-relaxed">
                     <GitBranch
                       size={13}
                       className={`mt-0.5 flex-shrink-0 ${
-                        project.color === 'green' ? 'text-[#00ff41]' : 'text-[#ff2222]'
+                        project.color === 'green' ? 'text-[#2563eb]' : 'text-[#7c3aed]'
                       }`}
                     />
                     {pt}
@@ -148,8 +148,8 @@ export default function Projects() {
                     key={tag}
                     className={`px-2 py-1 text-xs font-mono-code border ${
                       project.color === 'green'
-                        ? 'border-[#00ff4120] text-[#00ff4180] bg-[#00ff4108]'
-                        : 'border-[#ff222220] text-[#ff222280] bg-[#ff222208]'
+                        ? 'border-[#2563eb15] text-[#2563eb80] bg-[#2563eb05]'
+                        : 'border-[#7c3aed15] text-[#7c3aed80] bg-[#7c3aed05]'
                     }`}
                   >
                     {tag}
@@ -164,8 +164,8 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 className={`mt-6 flex items-center justify-center gap-2 py-3 text-sm font-bold tracking-widest uppercase clip-corner-sm transition-all duration-300 ${
                   project.color === 'green'
-                    ? 'bg-[#00ff4115] border border-[#00ff4130] text-[#00ff41] hover:bg-[#00ff41] hover:text-black'
-                    : 'bg-[#ff222215] border border-[#ff222230] text-[#ff2222] hover:bg-[#ff2222] hover:text-white'
+                    ? 'bg-[#2563eb08] border border-[#2563eb20] text-[#2563eb] hover:bg-[#2563eb] hover:text-white'
+                    : 'bg-[#7c3aed08] border border-[#7c3aed20] text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white'
                 }`}
               >
                 <ExternalLink size={14} />

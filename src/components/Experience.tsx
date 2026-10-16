@@ -49,15 +49,15 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="py-24 relative">
+    <section id="experience" ref={sectionRef} className="py-24 relative bg-white">
       <div className="max-w-5xl mx-auto px-6">
         {/* Section header */}
         <div className="reveal mb-16 text-center">
-          <p className="font-mono-code text-xs text-[#00ff41] tracking-widest mb-3">// WORK HISTORY</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Professional <span className="text-[#00ff41] text-glow-green">Experience</span>
+          <p className="font-mono-code text-xs text-[#2563eb] tracking-widest mb-3">// WORK HISTORY</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+            Professional <span className="text-[#2563eb]">Experience</span>
           </h2>
-          <div className="mt-4 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-[#00ff41] to-transparent" />
+          <div className="mt-4 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-[#2563eb] to-transparent" />
         </div>
 
         <div className="relative">
@@ -65,7 +65,7 @@ export default function Experience() {
           <div
             className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px"
             style={{
-              background: 'linear-gradient(to bottom, transparent, #00ff4140, #ff222240, transparent)',
+              background: 'linear-gradient(to bottom, transparent, rgba(37,99,235,0.3), rgba(124,58,237,0.3), transparent)',
             }}
           />
 
@@ -81,10 +81,10 @@ export default function Experience() {
                 <div
                   className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full -translate-x-1/2 mt-6 z-10"
                   style={{
-                    background: exp.color === 'green' ? '#00ff41' : '#ff2222',
+                    background: exp.color === 'green' ? '#2563eb' : '#7c3aed',
                     boxShadow: exp.color === 'green'
-                      ? '0 0 12px #00ff41, 0 0 24px #00ff4160'
-                      : '0 0 12px #ff2222, 0 0 24px #ff222260',
+                      ? '0 0 12px rgba(37,99,235,0.6), 0 0 24px rgba(37,99,235,0.3)'
+                      : '0 0 12px rgba(124,58,237,0.6), 0 0 24px rgba(124,58,237,0.3)',
                   }}
                 />
 
@@ -93,30 +93,30 @@ export default function Experience() {
 
                 {/* Card */}
                 <div
-                  className={`ml-12 md:ml-0 md:w-1/2 border p-6 clip-corner project-card ${
+                  className={`ml-12 md:ml-0 md:w-1/2 border p-6 clip-corner project-card bg-white shadow-sm ${
                     exp.color === 'green'
-                      ? 'border-[#00ff4130] hover:border-[#00ff41] bg-[#00ff4105]'
-                      : 'border-[#ff222230] hover:border-[#ff2222] bg-[#ff22220a]'
+                      ? 'border-[#2563eb20] hover:border-[#2563eb]'
+                      : 'border-[#7c3aed20] hover:border-[#7c3aed]'
                   }`}
                 >
                   <div className="flex items-start justify-between flex-wrap gap-2 mb-4">
                     <div>
                       <h3 className={`font-bold text-lg ${
-                        exp.color === 'green' ? 'text-[#00ff41]' : 'text-[#ff2222]'
+                        exp.color === 'green' ? 'text-[#2563eb]' : 'text-[#7c3aed]'
                       }`}>
                         {exp.role}
                       </h3>
                       <div className="flex items-center gap-2 mt-1">
-                        <Briefcase size={13} className="text-gray-500" />
-                        <span className="text-white font-semibold text-sm">{exp.company}</span>
+                        <Briefcase size={13} className="text-slate-400" />
+                        <span className="text-slate-700 font-semibold text-sm">{exp.company}</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="flex items-center gap-1 text-gray-400 text-xs font-mono-code">
+                      <div className="flex items-center gap-1 text-slate-400 text-xs font-mono-code">
                         <Calendar size={11} />
                         {exp.period}
                       </div>
-                      <div className="flex items-center gap-1 text-gray-500 text-xs font-mono-code mt-1">
+                      <div className="flex items-center gap-1 text-slate-400 text-xs font-mono-code mt-1">
                         <MapPin size={11} />
                         {exp.location}
                       </div>
@@ -124,8 +124,8 @@ export default function Experience() {
                   </div>
                   <ul className="space-y-2">
                     {exp.points.map((pt) => (
-                      <li key={pt} className="flex items-start gap-2 text-gray-400 text-sm leading-relaxed">
-                        <span className={exp.color === 'green' ? 'text-[#00ff41]' : 'text-[#ff2222]'}>
+                      <li key={pt} className="flex items-start gap-2 text-slate-600 text-sm leading-relaxed">
+                        <span className={exp.color === 'green' ? 'text-[#2563eb]' : 'text-[#7c3aed]'}>
                           ▸
                         </span>
                         {pt}
