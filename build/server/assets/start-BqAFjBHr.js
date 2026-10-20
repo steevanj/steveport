@@ -1,5 +1,5 @@
 import { t as renderErrorPage } from "./error-page-DPAiK6Uh.js";
-import { A as isPromise, n as createMiddleware } from "./server-B4EHzCzM.js";
+import { A as isPromise, n as createMiddleware } from "./server-D-y6kYZV.js";
 //#region node_modules/@tanstack/start-client-core/dist/esm/createStart.js
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
 	for (let i = 0, len = serializationAdapters.length; i < len; i++) {

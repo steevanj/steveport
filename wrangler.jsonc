@@ -4,4 +4,12 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/server.ts",
+  // Contact form → Cloudflare Email Routing. The destination must be a verified
+  // address under Email Routing → Destination addresses for stevedev.live.
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "steevan.dev@gmail.com",
+    },
+  ],
 }

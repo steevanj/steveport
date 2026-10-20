@@ -9,12 +9,15 @@ import {
   Copy,
   Github,
   Linkedin,
+  Loader2,
   Mail,
   MessageCircle,
+  Send,
   Sparkles,
 } from 'lucide-react';
 import { contact, wizard } from '@/data/site';
 import type { BriefPrefill } from './brief';
+import EmailOptions from './EmailOptions';
 
 const STEPS = ['Project', 'Features', 'Timeline', 'Budget', 'Contact'] as const;
 
@@ -72,6 +75,9 @@ export default function Contact({ prefill }: { prefill: BriefPrefill | null }) {
   const [note, setNote] = useState<string | undefined>();
   const [touched, setTouched] = useState(false);
   const [sent, setSent] = useState<null | 'email' | 'whatsapp'>(null);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -112,19 +118,35 @@ export default function Contact({ prefill }: { prefill: BriefPrefill | null }) {
     setStep((s) => Math.max(0, s - 1));
   };
 
-  const send = (channel: 'email' | 'whatsapp') => {
+  const subject = `Project brief: ${form.businessType} — ${form.name}${form.company ? ` (${form.company})` : ''}`;
+
+  const send = async (channel: 'email' | 'whatsapp') => {
     if (!stepValid[4]) {
       setTouched(true);
       return;
     }
-    const brief = buildBrief(form, note);
-    if (channel === 'email') {
-      const subject = `Project brief: ${form.businessType} — ${form.name}${form.company ? ` (${form.company})` : ''}`;
-      window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
-    } else {
-      window.open(`${contact.whatsapp}?text=${encodeURIComponent(brief)}`, '_blank', 'noopener,noreferrer');
+    if (channel === 'whatsapp') {
+      window.open(`${contact.whatsapp}?text=${encodeURIComponent(buildBrief(form, note))}`, '_blank', 'noopener,noreferrer');
+      setSent('whatsapp');
+      return;
     }
-    setSent(channel);
+    // Email is sent automatically by the server — no mail app needed.
+    setSending(true);
+    setFailed(false);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ ...form, note, website: honeypot }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      if (!res.ok || !data.ok) throw new Error('send failed');
+      setSent('email');
+    } catch {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   const copyBrief = async () => {
@@ -142,6 +164,7 @@ export default function Contact({ prefill }: { prefill: BriefPrefill | null }) {
     setNote(undefined);
     setStep(0);
     setSent(null);
+    setFailed(false);
     setTouched(false);
   };
 
@@ -177,19 +200,20 @@ export default function Contact({ prefill }: { prefill: BriefPrefill | null }) {
           </ol>
 
           <div className="mt-10 grid gap-3 sm:grid-cols-2">
-            <a
-              href={`mailto:${contact.email}`}
-              className="card card-hover flex items-center gap-3 border-accent/30 p-4 sm:col-span-2"
-            >
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-white">
-                <Mail size={18} />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-[12px] font-semibold text-muted">Email me directly</span>
-                <span className="block text-[16px] font-extrabold break-all">{contact.email}</span>
-              </span>
-              <ArrowRight size={18} className="ml-auto shrink-0 text-accent" />
-            </a>
+            <div className="card border-accent/30 p-4 sm:col-span-2">
+              <div className="flex items-center gap-3">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent text-white">
+                  <Mail size={18} />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[12px] font-semibold text-muted">Email me directly</span>
+                  <span className="block text-[16px] font-extrabold break-all">{contact.email}</span>
+                </span>
+              </div>
+              <div className="mt-3.5">
+                <EmailOptions to={contact.email} subject="Project enquiry" />
+              </div>
+            </div>
             <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" className="card card-hover flex items-center gap-3 p-4">
               <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
                 <MessageCircle size={18} />
@@ -237,13 +261,25 @@ export default function Contact({ prefill }: { prefill: BriefPrefill | null }) {
                 <span className="grid h-16 w-16 place-items-center rounded-full bg-live/12 text-live">
                   <CircleCheck size={34} />
                 </span>
-                <h3 className="mt-6 text-2xl font-extrabold tracking-tight">Your brief is ready to go!</h3>
-                <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft">
-                  {sent === 'email'
-                    ? 'Your email app should have opened with everything filled in — just hit send.'
-                    : 'WhatsApp should have opened with your brief — just hit send.'}{' '}
-                  Didn’t open? Copy the brief and send it to <strong className="text-ink">{contact.email}</strong>.
-                </p>
+                {sent === 'email' ? (
+                  <>
+                    <h3 className="mt-6 text-2xl font-extrabold tracking-tight">
+                      Thanks, {form.name.trim().split(' ')[0]} — your brief is in my inbox!
+                    </h3>
+                    <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft">
+                      I’ll review it and reply to <strong className="text-ink">{form.email}</strong>{' '}
+                      {contact.responseTime.toLowerCase()}. Keep an eye on your spam folder just in case.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="mt-6 text-2xl font-extrabold tracking-tight">Your brief is ready to go!</h3>
+                    <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft">
+                      WhatsApp should have opened with your brief — just hit send. Didn’t open? Copy the brief and email it to{' '}
+                      <strong className="text-ink">{contact.email}</strong>.
+                    </p>
+                  </>
+                )}
                 <div className="mt-8 flex flex-wrap justify-center gap-3">
                   <button type="button" onClick={copyBrief} className="btn btn-ghost">
                     {copied ? <Check size={16} /> : <Copy size={16} />} {copied ? 'Copied!' : 'Copy brief'}
@@ -434,10 +470,32 @@ export default function Contact({ prefill }: { prefill: BriefPrefill | null }) {
                               aria-invalid={touched && form.description.trim().length < 10}
                             />
                           </label>
+                          {/* Honeypot for bots — hidden from people and screen readers */}
+                          <input
+                            type="text"
+                            name="website"
+                            value={honeypot}
+                            onChange={(e) => setHoneypot(e.target.value)}
+                            tabIndex={-1}
+                            autoComplete="off"
+                            aria-hidden="true"
+                            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                          />
                         </div>
                       </div>
                     )}
                   </div>
+
+                  {failed && (
+                    <div role="alert" className="mt-4 rounded-xl border border-rose-200 bg-rose-50 p-4">
+                      <p className="text-[14px] font-semibold text-rose-700">
+                        Sorry — the form couldn’t send just now. Send the same brief with one click instead:
+                      </p>
+                      <div className="mt-3">
+                        <EmailOptions to={contact.email} subject={subject} body={buildBrief(form, note)} />
+                      </div>
+                    </div>
+                  )}
 
                   {showError && (
                     <p role="alert" className="mt-4 text-[14px] font-semibold text-rose-600">
@@ -466,8 +524,9 @@ export default function Contact({ prefill }: { prefill: BriefPrefill | null }) {
                         <button type="button" onClick={() => send('whatsapp')} className="btn btn-ghost">
                           <MessageCircle size={16} /> Send via WhatsApp
                         </button>
-                        <button type="submit" className="btn btn-primary">
-                          <Mail size={16} /> Send brief
+                        <button type="submit" disabled={sending} className="btn btn-primary disabled:opacity-70">
+                          {sending ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                          {sending ? 'Sending…' : 'Send brief'}
                         </button>
                       </div>
                     )}

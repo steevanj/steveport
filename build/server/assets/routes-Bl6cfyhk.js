@@ -543,6 +543,16 @@ var Linkedin = createLucideIcon("linkedin", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var LoaderCircle = createLucideIcon("loader-circle", [["path", {
+	d: "M21 12a9 9 0 1 1-6.219-8.56",
+	key: "13zald"
+}]]);
+/**
+* @license lucide-react v0.575.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Lock = createLucideIcon("lock", [["rect", {
 	width: "18",
 	height: "11",
@@ -695,6 +705,19 @@ var Ruler = createLucideIcon("ruler", [
 		key: "wo5hmg"
 	}]
 ]);
+/**
+* @license lucide-react v0.575.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Send = createLucideIcon("send", [["path", {
+	d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
+	key: "1ffxy3"
+}], ["path", {
+	d: "m21.854 2.147-10.94 10.939",
+	key: "12cjpa"
+}]]);
 /**
 * @license lucide-react v0.575.0 - ISC
 *
@@ -2651,6 +2674,143 @@ function Pricing({ onPrefill }) {
 	});
 }
 //#endregion
+//#region src/lib/email-links.ts
+var q = (params) => Object.entries(params).filter(([, v]) => v).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&");
+var gmailLink = (to, subject, body) => `https://mail.google.com/mail/?${q({
+	view: "cm",
+	fs: "1",
+	to,
+	su: subject,
+	body
+})}`;
+var outlookLink = (to, subject, body) => `https://outlook.live.com/mail/0/deeplink/compose?${q({
+	to,
+	subject,
+	body
+})}`;
+var mailtoLink = (to, subject, body) => {
+	const query = q({
+		subject,
+		body
+	});
+	return `mailto:${to}${query ? `?${query}` : ""}`;
+};
+//#endregion
+//#region src/components/EmailOptions.tsx
+function EmailOptions({ to, subject, body, dark = false }) {
+	const [copied, setCopied] = (0, import_react.useState)(false);
+	const copy = async () => {
+		try {
+			await navigator.clipboard.writeText(to);
+			setCopied(true);
+			setTimeout(() => setCopied(false), 2e3);
+		} catch {
+			setCopied(false);
+		}
+	};
+	const base = `inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[13px] font-bold transition-colors ${dark ? "bg-white/10 text-white hover:bg-white/20" : "border border-line bg-white text-ink hover:border-accent hover:text-accent"}`;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "flex flex-wrap gap-2",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+				href: gmailLink(to, subject, body),
+				target: "_blank",
+				rel: "noopener noreferrer",
+				className: base,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GmailIcon, {}), " Gmail"]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+				href: outlookLink(to, subject, body),
+				target: "_blank",
+				rel: "noopener noreferrer",
+				className: base,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(OutlookIcon, {}), " Outlook"]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+				href: mailtoLink(to, subject, body),
+				className: base,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { size: 14 }), " Mail app"]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+				type: "button",
+				onClick: copy,
+				className: base,
+				"aria-label": `Copy ${to}`,
+				children: [copied ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+					size: 14,
+					className: "text-live"
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Copy, { size: 14 }), copied ? "Copied" : "Copy"]
+			})
+		]
+	});
+}
+function GmailIcon() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+		width: "14",
+		height: "14",
+		viewBox: "0 0 24 24",
+		"aria-hidden": "true",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#4285F4",
+				d: "M2 6.5v11A1.5 1.5 0 0 0 3.5 19H6V9.8L2 6.5z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#34A853",
+				d: "M18 19h2.5a1.5 1.5 0 0 0 1.5-1.5v-11l-4 3.3V19z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#FBBC04",
+				d: "M18 5.5v4.3l4-3.3V5.4c0-1.3-1.5-2-2.5-1.2L18 5.5z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#EA4335",
+				d: "M6 9.8V5.5l6 4.6 6-4.6v4.3l-6 4.6-6-4.6z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#C5221F",
+				d: "M2 5.4v1.1l4 3.3V5.5L4.5 4.2C3.5 3.4 2 4.1 2 5.4z"
+			})
+		]
+	});
+}
+function OutlookIcon() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+		width: "14",
+		height: "14",
+		viewBox: "0 0 24 24",
+		"aria-hidden": "true",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", {
+				x: "2",
+				y: "4",
+				width: "13",
+				height: "16",
+				rx: "2",
+				fill: "#0F6CBD"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ellipse", {
+				cx: "8.5",
+				cy: "12",
+				rx: "3",
+				ry: "3.6",
+				fill: "none",
+				stroke: "#fff",
+				strokeWidth: "1.8"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#28A8EA",
+				d: "M15 7h6a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-6V7z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#fff",
+				d: "m15 9 3.5 2.5L22 9v1.2l-3.5 2.5L15 10.2z",
+				opacity: ".9"
+			})
+		]
+	});
+}
+//#endregion
 //#region src/components/Contact.tsx
 var STEPS = [
 	"Project",
@@ -2696,6 +2856,9 @@ function Contact({ prefill }) {
 	const [note, setNote] = (0, import_react.useState)();
 	const [touched, setTouched] = (0, import_react.useState)(false);
 	const [sent, setSent] = (0, import_react.useState)(null);
+	const [sending, setSending] = (0, import_react.useState)(false);
+	const [failed, setFailed] = (0, import_react.useState)(false);
+	const [honeypot, setHoneypot] = (0, import_react.useState)("");
 	const [copied, setCopied] = (0, import_react.useState)(false);
 	(0, import_react.useEffect)(() => {
 		if (!prefill) return;
@@ -2733,17 +2896,37 @@ function Contact({ prefill }) {
 		setTouched(false);
 		setStep((s) => Math.max(0, s - 1));
 	};
-	const send = (channel) => {
+	const subject = `Project brief: ${form.businessType} — ${form.name}${form.company ? ` (${form.company})` : ""}`;
+	const send = async (channel) => {
 		if (!stepValid[4]) {
 			setTouched(true);
 			return;
 		}
-		const brief = buildBrief(form, note);
-		if (channel === "email") {
-			const subject = `Project brief: ${form.businessType} — ${form.name}${form.company ? ` (${form.company})` : ""}`;
-			window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
-		} else window.open(`${contact.whatsapp}?text=${encodeURIComponent(brief)}`, "_blank", "noopener,noreferrer");
-		setSent(channel);
+		if (channel === "whatsapp") {
+			window.open(`${contact.whatsapp}?text=${encodeURIComponent(buildBrief(form, note))}`, "_blank", "noopener,noreferrer");
+			setSent("whatsapp");
+			return;
+		}
+		setSending(true);
+		setFailed(false);
+		try {
+			const res = await fetch("/api/contact", {
+				method: "POST",
+				headers: { "content-type": "application/json" },
+				body: JSON.stringify({
+					...form,
+					note,
+					website: honeypot
+				})
+			});
+			const data = await res.json().catch(() => ({}));
+			if (!res.ok || !data.ok) throw new Error("send failed");
+			setSent("email");
+		} catch {
+			setFailed(true);
+		} finally {
+			setSending(false);
+		}
 	};
 	const copyBrief = async () => {
 		try {
@@ -2759,6 +2942,7 @@ function Contact({ prefill }) {
 		setNote(void 0);
 		setStep(0);
 		setSent(null);
+		setFailed(false);
 		setTouched(false);
 	};
 	const progress = (step + 1) / STEPS.length * 100;
@@ -2807,15 +2991,14 @@ function Contact({ prefill }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "mt-10 grid gap-3 sm:grid-cols-2",
 						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-								href: `mailto:${contact.email}`,
-								className: "card card-hover flex items-center gap-3 border-accent/30 p-4 sm:col-span-2",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "grid h-10 w-10 place-items-center rounded-xl bg-accent text-white",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "card border-accent/30 p-4 sm:col-span-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent text-white",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { size: 18 })
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 										className: "min-w-0",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 											className: "block text-[12px] font-semibold text-muted",
@@ -2824,12 +3007,14 @@ function Contact({ prefill }) {
 											className: "block text-[16px] font-extrabold break-all",
 											children: contact.email
 										})]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
-										size: 18,
-										className: "ml-auto shrink-0 text-accent"
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "mt-3.5",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EmailOptions, {
+										to: contact.email,
+										subject: "Project enquiry"
 									})
-								]
+								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 								href: contact.whatsapp,
@@ -2912,23 +3097,40 @@ function Contact({ prefill }) {
 								className: "grid h-16 w-16 place-items-center rounded-full bg-live/12 text-live",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { size: 34 })
 							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							sent === "email" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
 								className: "mt-6 text-2xl font-extrabold tracking-tight",
-								children: "Your brief is ready to go!"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								children: [
+									"Thanks, ",
+									form.name.trim().split(" ")[0],
+									" — your brief is in my inbox!"
+								]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft",
 								children: [
-									sent === "email" ? "Your email app should have opened with everything filled in — just hit send." : "WhatsApp should have opened with your brief — just hit send.",
+									"I’ll review it and reply to ",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+										className: "text-ink",
+										children: form.email
+									}),
 									" ",
-									"Didn’t open? Copy the brief and send it to ",
+									contact.responseTime.toLowerCase(),
+									". Keep an eye on your spam folder just in case."
+								]
+							})] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "mt-6 text-2xl font-extrabold tracking-tight",
+								children: "Your brief is ready to go!"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								className: "mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft",
+								children: [
+									"WhatsApp should have opened with your brief — just hit send. Didn’t open? Copy the brief and email it to",
+									" ",
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
 										className: "text-ink",
 										children: contact.email
 									}),
 									"."
 								]
-							}),
+							})] }),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "mt-8 flex flex-wrap justify-center gap-3",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
@@ -3143,11 +3345,36 @@ function Contact({ prefill }) {
 													placeholder: "What problem are you solving, who are the users, and is there an existing app or design?",
 													"aria-invalid": touched && form.description.trim().length < 10
 												})]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+												type: "text",
+												name: "website",
+												value: honeypot,
+												onChange: (e) => setHoneypot(e.target.value),
+												tabIndex: -1,
+												autoComplete: "off",
+												"aria-hidden": "true",
+												className: "absolute -left-[9999px] h-0 w-0 opacity-0"
 											})
 										]
 									})] })
 								]
 							}, step),
+							failed && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								role: "alert",
+								className: "mt-4 rounded-xl border border-rose-200 bg-rose-50 p-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[14px] font-semibold text-rose-700",
+									children: "Sorry — the form couldn’t send just now. Send the same brief with one click instead:"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "mt-3",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EmailOptions, {
+										to: contact.email,
+										subject,
+										body: buildBrief(form, note)
+									})
+								})]
+							}),
 							showError && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								role: "alert",
 								className: "mt-4 text-[14px] font-semibold text-rose-600",
@@ -3174,8 +3401,12 @@ function Contact({ prefill }) {
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, { size: 16 }), " Send via WhatsApp"]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 										type: "submit",
-										className: "btn btn-primary",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { size: 16 }), " Send brief"]
+										disabled: sending,
+										className: "btn btn-primary disabled:opacity-70",
+										children: [sending ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+											size: 16,
+											className: "animate-spin"
+										}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Send, { size: 16 }), sending ? "Sending…" : "Send brief"]
 									})]
 								})]
 							})
