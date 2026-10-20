@@ -1,5 +1,5 @@
 import { a as __toESM, n as require_react, t as require_jsx_runtime } from "./jsx-runtime-DQ23DRnX.js";
-import { C as trimPathRight, D as getUrlScheme, E as functionalUpdate$1, M as redirect, N as rootRouteId, O as isDangerousProtocol, S as trimPathLeft, T as escapeHtml, _ as createNonReactiveMutableStore, b as cleanPath, c as useRouter, d as getAssetCrossOrigin, f as getScriptPreloadAttrs, g as RouterCore, h as _getAssetMatches, k as isModuleNotFoundError, l as useHydrated, m as reactUse, o as dummyMatchContext, p as resolveManifestCssLink, r as Outlet, s as matchContext, u as appendUniqueUserTags, v as createNonReactiveReadonlyStore, w as deepEqual, x as removeTrailingSlash, y as invariant } from "./server-DGFLTlNn.js";
+import { C as trimPathRight, D as getUrlScheme, E as functionalUpdate$1, M as redirect, N as rootRouteId, O as isDangerousProtocol, S as trimPathLeft, T as escapeHtml, _ as createNonReactiveMutableStore, b as cleanPath, c as useRouter, d as getAssetCrossOrigin, f as getScriptPreloadAttrs, g as RouterCore, h as _getAssetMatches, k as isModuleNotFoundError, l as useHydrated, m as reactUse, o as dummyMatchContext, p as resolveManifestCssLink, r as Outlet, s as matchContext, u as appendUniqueUserTags, v as createNonReactiveReadonlyStore, w as deepEqual, x as removeTrailingSlash, y as invariant } from "./server-B4EHzCzM.js";
 //#endregion
 //#region node_modules/@tanstack/router-core/dist/esm/ssr/bodyScripts.js
 function getSsrBodyScriptParts(matches, manifest, nonce, routeScriptAttrs) {
@@ -2783,12 +2783,6 @@ var QueryClientProvider = ({ client, children }) => {
 //#region src/styles.css?url
 var styles_default = "/assets/styles-BzHydSdQ.css";
 //#endregion
-//#region src/assets/favicon-64.png
-var favicon_64_default = "/assets/favicon-64-ucDUdbNo.png";
-//#endregion
-//#region src/assets/apple-touch-icon.png
-var apple_touch_icon_default = "/assets/apple-touch-icon-Bpk65-hY.png";
-//#endregion
 //#region src/assets/og-image.jpg
 var og_image_default = "/assets/og-image-BzcpHMW4.jpg";
 //#endregion
@@ -3013,17 +3007,28 @@ var Route$1 = createRootRouteWithContext()({
 			},
 			{
 				rel: "icon",
-				type: "image/png",
-				href: favicon_64_default
+				href: "/favicon.ico",
+				sizes: "48x48"
 			},
 			{
-				rel: "shortcut icon",
+				rel: "icon",
+				type: "image/svg+xml",
+				href: "/favicon.svg"
+			},
+			{
+				rel: "icon",
 				type: "image/png",
-				href: favicon_64_default
+				sizes: "96x96",
+				href: "/favicon-96x96.png"
 			},
 			{
 				rel: "apple-touch-icon",
-				href: apple_touch_icon_default
+				sizes: "180x180",
+				href: "/apple-touch-icon.png"
+			},
+			{
+				rel: "manifest",
+				href: "/site.webmanifest"
 			},
 			{
 				rel: "stylesheet",

@@ -9,8 +9,6 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import faviconImage from "../assets/favicon-64.png";
-import appleTouchIcon from "../assets/apple-touch-icon.png";
 import ogImage from "../assets/og-image.jpg";
 
 const SITE_URL = "https://www.stevedev.live/";
@@ -160,20 +158,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap",
       },
-      {
-        rel: "icon",
-        type: "image/png",
-        href: faviconImage,
-      },
-      {
-        rel: "shortcut icon",
-        type: "image/png",
-        href: faviconImage,
-      },
-      {
-        rel: "apple-touch-icon",
-        href: appleTouchIcon,
-      },
+      // Fixed (unhashed) URLs from /public so Google and browsers can always find them.
+      { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       {
         rel: "stylesheet",
         href: appCss,

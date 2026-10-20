@@ -1,0 +1,12 @@
+{
+  "name": "Steve Dev — Django Developer",
+  "short_name": "steve.dev",
+  "icons": [
+    { "src": "/favicon-96x96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#fafaf9",
+  "background_color": "#fafaf9",
+  "display": "standalone",
+  "start_url": "/"
+}
