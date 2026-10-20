@@ -9,21 +9,65 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import profileImage from "../assets/title.png";
+import faviconImage from "../assets/favicon-64.png";
+import appleTouchIcon from "../assets/apple-touch-icon.png";
+import ogImage from "../assets/og-image.jpg";
+
+const SITE_URL = "https://www.stevedev.live/";
+const TITLE = "Hire a Django Developer — Steve | Django SaaS Architect & Backend Engineer";
+const DESCRIPTION =
+  "Freelance Django developer helping startups and businesses build scalable web apps, REST APIs, multi-tenant SaaS platforms, Redis/Celery systems and production deployments. Free consultation, fixed quotes, replies within 24 hours.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}#person`,
+      name: "Steevan J",
+      alternateName: "Steve",
+      jobTitle: "Django SaaS Architect & Backend Engineer",
+      url: SITE_URL,
+      email: "mailto:hello@stevedev.live",
+      address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
+      sameAs: ["https://github.com/steevanj", "https://linkedin.com/in/steechinna"],
+      knowsAbout: ["Django", "Django REST Framework", "Python", "PostgreSQL", "Redis", "Celery", "Docker", "SaaS architecture"],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE_URL}#service`,
+      name: "Steve Dev — Django Development",
+      url: SITE_URL,
+      email: "hello@stevedev.live",
+      image: `${SITE_URL.replace(/\/$/, "")}${ogImage}`,
+      priceRange: "$$",
+      areaServed: "Worldwide",
+      founder: { "@id": `${SITE_URL}#person` },
+      serviceType: [
+        "Django Web Development",
+        "SaaS Development",
+        "REST API Development",
+        "DevOps & Deployment",
+        "Performance Optimization",
+        "Maintenance & Support",
+      ],
+    },
+  ],
+};
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-canvas px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <h1 className="text-7xl font-bold text-ink">404</h1>
+        <h2 className="mt-4 text-xl font-semibold text-ink">Page not found</h2>
+        <p className="mt-2 text-sm text-muted">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
           >
             Go home
           </Link>
@@ -38,12 +82,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-canvas px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-xl font-semibold tracking-tight text-ink">
           This page didn't load
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -52,13 +96,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dark"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-canvas px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-slate-50"
           >
             Go home
           </a>
@@ -73,32 +117,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Steve Dev — Python & Django Backend Developer" },
-      {
-        name: "description",
-        content:
-          "Steve Dev — Backend engineer at www.stevedev.live, building scalable Django APIs, secure multi-tenant systems, and high-performance Python applications.",
-      },
-      { name: "author", content: "Steve Dev" },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { name: "author", content: "Steevan J (Steve)" },
       {
         name: "keywords",
         content:
-          "Steve Dev, stevedev.live, Django Developer, Python Backend, REST APIs, DRF, Bengaluru Developer, Backend Engineer, SaaS Architect, API Architect",
+          "hire Django developer, freelance Django developer India, Django REST API developer, Python backend developer, Django SaaS development, multi-tenant Django, Django Redis expert, Django Celery developer, stevedev.live",
       },
       { name: "robots", content: "index, follow" },
-      { name: "theme-color", content: "#E9EBEB" },
-      { property: "og:url", content: "https://www.stevedev.live/" },
+      { name: "theme-color", content: "#fafaf9" },
+      { property: "og:url", content: SITE_URL },
       { property: "og:site_name", content: "Steve Dev" },
-      { property: "og:title", content: "Steve Dev — Python & Django Backend Developer" },
-      { property: "og:description", content: "Discover premium backend engineering at www.stevedev.live — Django APIs, secure auth, and scalable SaaS systems." },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: profileImage },
-      { property: "og:image:alt", content: "Steve Dev profile portrait" },
+      { property: "og:image", content: ogImage },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Steve — Django SaaS Architect & Backend Engineer" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Steve Dev — Python & Django Backend Developer" },
-      { name: "twitter:description", content: "Discover premium backend engineering at www.stevedev.live — Django APIs, secure auth, and scalable SaaS systems." },
-      { name: "twitter:image", content: profileImage },
-      { name: "twitter:image:alt", content: "Steve Dev profile portrait" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: ogImage },
+      { name: "twitter:image:alt", content: "Steve — Django SaaS Architect & Backend Engineer" },
     ],
     links: [
       {
@@ -116,21 +158,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Share+Tech+Mono&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap",
       },
       {
         rel: "icon",
         type: "image/png",
-        href: profileImage,
+        href: faviconImage,
       },
       {
         rel: "shortcut icon",
         type: "image/png",
-        href: profileImage,
+        href: faviconImage,
       },
       {
         rel: "apple-touch-icon",
-        href: profileImage,
+        href: appleTouchIcon,
       },
       {
         rel: "stylesheet",
@@ -146,9 +188,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Lets CSS hide scroll-reveal content only when JS is running */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <HeadContent />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>
         {children}

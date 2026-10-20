@@ -1,12 +1,24 @@
 {
   "C:/Users/steec/OneDrive/Pictures/steve/Site/steveport/src/styles.css": {
-    "file": "assets/styles-sQKPqLCB.css",
+    "file": "assets/styles-BzHydSdQ.css",
     "src": "C:/Users/steec/OneDrive/Pictures/steve/Site/steveport/src/styles.css"
   },
-  "_server-YerVQjFn.js": {
-    "file": "assets/server-YerVQjFn.js",
+  "_error-page-DPAiK6Uh.js": {
+    "file": "assets/error-page-DPAiK6Uh.js",
+    "name": "error-page"
+  },
+  "_jsx-runtime-DQ23DRnX.js": {
+    "file": "assets/jsx-runtime-DQ23DRnX.js",
+    "name": "jsx-runtime"
+  },
+  "node_modules/@tanstack/react-start/dist/default-entry/esm/server.js": {
+    "file": "assets/server-DGFLTlNn.js",
     "name": "server",
+    "src": "node_modules/@tanstack/react-start/dist/default-entry/esm/server.js",
     "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-DQ23DRnX.js"
+    ],
     "dynamicImports": [
       "tanstack-start-manifest:v",
       "src/router.tsx",
@@ -14,60 +26,64 @@
       "node_modules/@tanstack/start-server-core/dist/esm/empty-plugin-adapters.js"
     ]
   },
-  "_worker-entry-BOt7BceO.js": {
-    "file": "assets/worker-entry-BOt7BceO.js",
-    "name": "worker-entry",
-    "dynamicImports": [
-      "_server-YerVQjFn.js"
-    ]
-  },
   "node_modules/@tanstack/start-server-core/dist/esm/empty-plugin-adapters.js": {
-    "file": "assets/empty-plugin-adapters-BFgPZ6_d.js",
+    "file": "assets/empty-plugin-adapters-D9UWiqvJ.js",
     "name": "empty-plugin-adapters",
     "src": "node_modules/@tanstack/start-server-core/dist/esm/empty-plugin-adapters.js",
     "isDynamicEntry": true
   },
-  "src/assets/title.png": {
-    "file": "assets/title-CV9z2TZ_.png",
-    "src": "src/assets/title.png"
+  "src/assets/apple-touch-icon.png": {
+    "file": "assets/apple-touch-icon-Bpk65-hY.png",
+    "src": "src/assets/apple-touch-icon.png"
+  },
+  "src/assets/favicon-64.png": {
+    "file": "assets/favicon-64-ucDUdbNo.png",
+    "src": "src/assets/favicon-64.png"
+  },
+  "src/assets/og-image.jpg": {
+    "file": "assets/og-image-BzcpHMW4.jpg",
+    "src": "src/assets/og-image.jpg"
   },
   "src/router.tsx": {
-    "file": "assets/router-Dr9Uvw7a.js",
+    "file": "assets/router-AtiMUzrB.js",
     "name": "router",
     "src": "src/router.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_server-YerVQjFn.js"
+      "_jsx-runtime-DQ23DRnX.js",
+      "node_modules/@tanstack/react-start/dist/default-entry/esm/server.js"
     ],
     "dynamicImports": [
       "src/routes/index.tsx?tsr-split=component"
     ],
     "assets": [
-      "assets/title-CV9z2TZ_.png",
-      "assets/styles-sQKPqLCB.css"
+      "assets/favicon-64-ucDUdbNo.png",
+      "assets/apple-touch-icon-Bpk65-hY.png",
+      "assets/og-image-BzcpHMW4.jpg",
+      "assets/styles-BzHydSdQ.css"
     ]
   },
   "src/routes/index.tsx?tsr-split=component": {
-    "file": "assets/index-B-PMBk7o.js",
-    "name": "index",
+    "file": "assets/routes-jMl2Lp9a.js",
+    "name": "routes",
     "src": "src/routes/index.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
-      "_server-YerVQjFn.js"
+      "_jsx-runtime-DQ23DRnX.js"
     ]
   },
   "src/start.ts": {
-    "file": "assets/start-B5kLVVpE.js",
+    "file": "assets/start-DFmLSYTm.js",
     "name": "start",
     "src": "src/start.ts",
     "isDynamicEntry": true,
     "imports": [
-      "_server-YerVQjFn.js",
-      "_worker-entry-BOt7BceO.js"
+      "_error-page-DPAiK6Uh.js",
+      "node_modules/@tanstack/react-start/dist/default-entry/esm/server.js"
     ]
   },
   "tanstack-start-manifest:v": {
-    "file": "assets/_tanstack-start-manifest_v-BrYccFFL.js",
+    "file": "assets/_tanstack-start-manifest_v-BCKEekTI.js",
     "name": "_tanstack-start-manifest_v",
     "src": "tanstack-start-manifest:v",
     "isDynamicEntry": true
@@ -78,7 +94,10 @@
     "src": "virtual:cloudflare/worker-entry",
     "isEntry": true,
     "imports": [
-      "_worker-entry-BOt7BceO.js"
+      "_error-page-DPAiK6Uh.js"
+    ],
+    "dynamicImports": [
+      "node_modules/@tanstack/react-start/dist/default-entry/esm/server.js"
     ]
   }
 }

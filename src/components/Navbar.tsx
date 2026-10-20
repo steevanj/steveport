@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-
-const links = ['About', 'Experience', 'Projects', 'Skills', 'Education', 'Contact'];
+import { useEffect, useState } from 'react';
+import { ArrowRight, Menu, X } from 'lucide-react';
+import { contact, navLinks } from '@/data/site';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -10,109 +9,99 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 50);
-      for (const link of links) {
-        const el = document.getElementById(link.toLowerCase());
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) {
-            setActive(link);
-          }
-        }
+      setScrolled(window.scrollY > 24);
+      let current = '';
+      for (const link of navLinks) {
+        const el = document.querySelector(link.href);
+        if (el && el.getBoundingClientRect().top <= 120) current = link.href;
       }
+      setActive(current);
     };
-    window.addEventListener('scroll', onScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-    setOpen(false);
-  };
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+  }, [open]);
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        background: scrolled ? 'rgba(248,250,252,0.96)' : 'transparent',
-        borderBottom: scrolled ? '1px solid rgba(37,99,235,0.12)' : 'none',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        boxShadow: scrolled ? '0 2px 20px rgba(37,99,235,0.08)' : 'none',
-      }}
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled || open ? 'border-b border-line bg-canvas/85 backdrop-blur-xl' : 'border-b border-transparent'
+      }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-bold text-xl tracking-widest text-[#2563eb] animate-flicker"
-        >
-          &lt;STEVE.DEV/&gt;
-        </button>
+      <nav className="container-x flex h-[72px] items-center justify-between gap-6" aria-label="Main">
+        <a href="#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-ink font-mono text-sm font-bold text-white transition-transform group-hover:-rotate-6">
+            S/
+          </span>
+          <span className="text-[17px] font-extrabold tracking-tight">
+            steve<span className="text-accent">.dev</span>
+          </span>
+        </a>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <button
-              key={link}
-              onClick={() => scrollTo(link)}
-              className={`nav-link text-sm tracking-widest uppercase font-mono-code transition-colors ${
-                active === link ? 'text-[#2563eb] active' : 'text-slate-500 hover:text-[#2563eb]'
+        <div className="hidden items-center gap-1 lg:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`rounded-full px-4 py-2 text-[14px] font-semibold transition-colors ${
+                active === link.href ? 'bg-white text-ink shadow-sm ring-1 ring-line' : 'text-muted hover:text-ink'
               }`}
             >
-              {link}
-            </button>
+              {link.label}
+            </a>
           ))}
-          <a
-            href="mailto:steevan.dev@gmail.com"
-            className="clip-corner-sm px-5 py-2 text-sm tracking-widest uppercase font-bold text-white bg-[#2563eb] hover:bg-[#7c3aed] transition-colors duration-300"
-            style={{ boxShadow: '0 0 15px rgba(37,99,235,0.35)' }}
-          >
-            Hire Me
-          </a>
-          <a
-            href="https://drive.google.com/file/d/18Phc4dvb8O8mo8kPkrC1vs666T1-Emn8/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="clip-corner-sm px-5 py-2 text-sm tracking-widest uppercase font-bold border border-[#2563eb30] text-[#2563eb] hover:border-[#2563eb] transition-colors duration-300"
-          >
-            Resume
+        </div>
+
+        <div className="hidden items-center gap-4 lg:flex">
+          <span className="flex items-center gap-2 text-[13px] font-semibold text-ink-soft">
+            <span className="live-dot" />
+            Available
+          </span>
+          <a href="#contact" className="btn btn-primary !px-5 !py-2.5 !text-[14px]">
+            Start a project <ArrowRight size={15} />
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden text-[#2563eb] p-2"
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="grid h-10 w-10 place-items-center rounded-xl border border-line bg-white lg:hidden"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile menu */}
       {open && (
-        <div
-          className="md:hidden border-t border-[#2563eb20] bg-white/95 px-6 py-4 flex flex-col gap-4"
-          style={{ backdropFilter: 'blur(12px)' }}
-        >
-          {links.map((link) => (
-            <button
-              key={link}
-              onClick={() => scrollTo(link)}
-              className="text-left text-sm tracking-widest uppercase font-mono-code text-slate-500 hover:text-[#2563eb] transition-colors py-2 border-b border-[#2563eb08]"
-            >
-              {link}
-            </button>
-          ))}
-          <a
-            href="https://drive.google.com/file/d/18Phc4dvb8O8mo8kPkrC1vs666T1-Emn8/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-left text-sm tracking-widest uppercase font-mono-code text-[#2563eb] transition-colors py-2"
-          >
-            Resume
-          </a>
+        <div className="h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-canvas lg:hidden">
+          <div className="container-x flex flex-col gap-1 py-6">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="border-b border-line py-4 text-2xl font-extrabold tracking-tight"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a href="#contact" onClick={() => setOpen(false)} className="btn btn-primary mt-6">
+              Start a project <ArrowRight size={16} />
+            </a>
+            <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-ghost mt-3">
+              Chat on WhatsApp
+            </a>
+            <p className="mt-6 flex items-center justify-center gap-2 text-sm text-muted">
+              <span className="live-dot" /> {contact.availability}
+            </p>
+          </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }
